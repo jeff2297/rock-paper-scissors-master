@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+
+  <title>Frontend Mentor | Rock, Paper, Scissors</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600&display=swap');
+
+    .attribution {
+      display: flex;
+      position: relative;
+      font-size: 11px;
+      text-align: center;
+      top: -16rem
+    }
+
+    .attribution a {
+      color: hsl(228, 45%, 44%);
+    }
+
+    body {
+      background-color: hsl(214, 47%, 23%);
+      color: white;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      height: 5rem;
+    }
+
+    .header {
+      display: block;
+      position: relative;
+      left: 20rem;
+      top: 50px;
+      width: 50%;
+      height: 8rem;
+      border: 1px solid white;
+      border-radius: 10px;
+
+    }
+
+    .header img {
+      display: flex;
+      position: relative;
+      top: 25px;
+      left: 20px
+    }
+
+    .score {
+      display: block;
+      position: relative;
+      left: 32rem;
+      top: -50px;
+      background-color: white;
+      height: 80px;
+      width: 100px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .score p {
+      position: relative;
+      top: 8px;
+      color: hsl(229, 25%, 31%);
+      margin: 0px;
+      font-size: 14px;
+    }
+
+    .score h2 {
+      position: relative;
+      top: 20px;
+      color: black;
+      font-size: 40px;
+      font-weight: bold;
+      opacity: 0.7;
+      margin: -15px;
+    }
+
+    button {
+      background-color: hsl(214, 47%, 23%);
+      border-radius: 5px;
+      border: 1px solid white;
+      color: white;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+      cursor: pointer;
+    }
+
+    .results {
+      display: flexbox;
+      position: relative;
+      left: 35rem;
+      top: -40rem;
+      visibility: hidden;
+    }
+
+    .results h1 {
+      position: relative;
+      top: 30px;
+    }
+
+    #play-again {
+      background-color: white;
+      color: hsl(214, 100%, 26%);
+      position: relative;
+      left: -1rem;
+      width: 150px;
+      height: 30px;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    #rules {
+      display: flex;
+      position: relative;
+      top: 18.5rem;
+      float: right;
+      height: 30px;
+      width: 100px;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .pick {
+      display: flex;
+      position: relative;
+      visibility: hidden;
+      left: 20rem;
+      top: -37rem;
+      font-size: 20px;
+      font-family: 'Barlow Semi Condensed', sans-serif;
+    }
+
+    .pick p {
+      margin-right: 25rem
+    }
+
+    .main {
+      background-image: url("images/bg-triangle.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 300px;
+      display: flexbox;
+      position: relative;
+      left: 23rem;
+      top: 8rem;
+      width: 40%;
+      height: 20rem;
+      border-radius: 10px;
+    }
+
+    .dot {
+      display: flex;
+      position: inherit;
+      height: 110px;
+      width: 110px;
+      background-color: rgb(245, 243, 243);
+      border-radius: 50%;
+      top: 13px;
+      left: 15px;
+      cursor: pointer;
+
+    }
+
+    .dot img {
+      display: flex;
+      position: relative;
+      left: 25px;
+      top: 22px;
+      height: 55%;
+    }
+
+    .outer {
+      height: 140px;
+      width: 140px;
+      background-color: hsl(220, 2%, 63%);
+      border-radius: 50%;
+      display: flex;
+      margin: 10px;
+      z-index: 1;
+    }
+
+    #paper {
+      background-color: hsl(230, 89%, 62%);
+      position: relative;
+      left: 2rem;
+      top: -2rem
+    }
+
+    #scissors {
+      background-color: hsl(39, 89%, 49%);
+      position: relative;
+      left: 18rem;
+      top: -11rem
+    }
+
+    #rock {
+      background-color: hsl(349, 71%, 52%);
+      position: relative;
+      left: 11rem;
+      top: -5rem
+    }
+
+    .comp {
+      display: flex;
+      position: inherit;
+      visibility: hidden;
+      height: 140px;
+      width: 140px;
+      background-color: hsl(229, 25%, 31%);
+      border-radius: 50%;
+      left: 28rem;
+      top: -26rem;
+      z-index: 0;
+    }
+
+    .rules-box {
+      display: flexbox;
+      position: relative;
+      visibility: hidden;
+      left: 27.5rem;
+      top: -18rem;
+      height: 340px;
+      width: 340px;
+      background-color: white;
+      border-radius: 10px;
+      z-index: 1;
+
+    }
+
+    .rules-box h2 {
+      color: hsl(229, 25%, 31%);
+      position: relative;
+      top: 20px;
+      left: 20px;
+      font-weight: bolder;
+
+    }
+
+    #rules-title {
+      position: relative;
+      top: 1.5rem;
+      left: 0.6rem;
+      width: 80%;
+    }
+
+    #close {
+      position: relative;
+      top: -15.1rem;
+      left: 18rem;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="header">
+    <img src="images/logo.svg" style="width: 20%;" />
+    <div class="score">
+      <p>SCORE</p>
+      <h2>0</h2>
+    </div>
+  </div>
+  <div class="main">
+    <span class="outer" id="paper"> <span class="dot"><img class="rps" src="images/icon-paper.svg" /></span></span>
+    <span class="outer" id="scissors"><span class="dot"><img class="rps" src="images/icon-scissors.svg" /></span></span>
+    <span class="outer" id="rock"><span class="dot"><img class="rps" src="images/icon-rock.svg" /></span></span>
+    <span class="comp"></span>
+
+  </div>
+  <button id="rules">RULES</button>
+  <div class="rules-box">
+    <h2>RULES</h2>
+    <img id="close" src="images/icon-close.svg" />
+    <img id="rules-title" src="images/image-rules.svg" />
+  </div>
+
+  <div class="pick">
+    <p>You Picked</p>
+    <p>The House Picked</p>
+  </div>
+  <div class="results">
+    <h1>YOU WIN</h1>
+    <h1>YOU LOSE</h1>
+    <button id="play-again">PLAY AGAIN</button>
+  </div>
+
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Jeff Chin</a>.
+  </div>
+  <script type="text/javascript">
+    let paper = document.getElementById('paper');
+    let scissors = document.getElementById('scissors');
+    let rock = document.getElementById('rock');
+    let outer = document.getElementsByClassName('outer');
+    let score = document.getElementsByClassName('score');
+    let pick = document.getElementsByClassName('pick');
+    let comp = document.getElementsByClassName('comp');
+    let results = document.getElementsByClassName('results');
+    let reset = document.getElementById('play-again');
+    let rules = document.getElementById('rules');
+    let scoreNum = score[0].children[1];
+    let scoreNum1 = Number(scoreNum.innerHTML);
+    let rulesBox = document.getElementsByClassName('rules-box');
+    let close = document.getElementById('close');
+
+    outer[0].onclick = function () {
+      pick[0].style.visibility = 'visible';
+      outer[0].style.left = '-5rem';
+      outer[0].style.top = '2rem';
+      outer[1].style.visibility = 'hidden';
+      outer[2].style.visibility = 'hidden';
+      comp[0].style.visibility = 'visible';
+      let compNum = Math.floor(Math.random() * 2) + 1;
+      
+
+      outer[compNum].style.visibility = 'visible';
+
+      //lose
+      if (compNum === 1) {
+        outer[compNum].style.left = '27.5rem';
+        outer[compNum].style.top = '-7rem';
+        results[0].style.visibility = "visible";
+        results[0].children[0].style.visibility = 'hidden'
+        results[0].children[1].style.top = '-1rem';
+        scoreNum1 -= 1;
+        scoreNum.innerHTML = scoreNum1;
+
+        //lose reset
+        reset.onclick = function () {
+          results[0].style.visibility = "hidden";
+          pick[0].style.visibility = 'hidden';
+          outer[1].style.visibility = 'visible';
+          outer[2].style.visibility = 'visible';
+          comp[0].style.visibility = "hidden";
+          outer[0].style.left = '2rem';
+          outer[0].style.top = '-2rem';
+          outer[compNum].style.left = '18rem';
+          outer[compNum].style.top = '-11rem';
+
+        }
+
+      }
+
+      //win
+      if (compNum === 2) {
+        outer[compNum].style.left = '27.5rem';
+        outer[compNum].style.top = '-16.7rem';
+        results[0].style.visibility = "visible";
+        results[0].children[1].style.visibility = 'hidden';
+        results[0].children[0].style.top = '30px';
+        scoreNum1 += 1;
+        scoreNum.innerHTML = scoreNum1;
+
+        //win reset
+        reset.onclick = function () {
+          results[0].style.visibility = "hidden";
+          pick[0].style.visibility = 'hidden';
+          outer[1].style.visibility = 'visible';
+          outer[2].style.visibility = 'visible';
+          comp[0].style.visibility = "hidden";
+          outer[0].style.left = '2rem';
+          outer[0].style.top = '-2rem';
+          outer[compNum].style.left = '11rem';
+          outer[compNum].style.top = '-5rem';
+
+        }
+      }
+    }
+
+    outer[1].onclick = function () {
+      pick[0].style.visibility = 'visible';
+      comp[0].style.visibility = 'visible';
+      outer[1].style.left = '-5rem';
+      outer[1].style.top = '-8rem';
+      outer[0].style.visibility = 'hidden';
+      outer[2].style.visibility = 'hidden';
+
+      let compNum = Math.random() < 0.5 ? 0 : 2;
+     
+      console.log(compNum)
+      outer[compNum].style.visibility = 'visible';
+      //won
+      if (compNum === 0) {
+        outer[compNum].style.left = '27.5rem';
+        outer[compNum].style.top = '2rem';
+        results[0].style.visibility = "visible";
+        results[0].children[0].style.top = '30px';
+        results[0].children[1].style.visibility = 'hidden';
+        scoreNum1 += 1;
+        scoreNum.innerHTML = scoreNum1;
+
+         //win reset
+         reset.onclick = function () {
+          results[0].style.visibility = "hidden";
+          pick[0].style.visibility = 'hidden';
+          outer[0].style.visibility = 'visible';
+          outer[2].style.visibility = 'visible';
+          comp[0].style.visibility = "hidden";
+          outer[1].style.left = '18rem';
+          outer[1].style.top = '-11rem';
+          outer[compNum].style.left = '2rem';
+          outer[compNum].style.top = '-2rem';
+
+        }
+      }
+
+      //lose
+      if (compNum === 2) {
+        outer[compNum].style.left = '27.5rem';
+        outer[compNum].style.top = '-16.7rem';
+        results[0].style.visibility = "visible";
+        results[0].children[0].style.visibility = 'hidden'
+        results[0].children[1].style.top = '-1rem';
+        scoreNum1 -= 1;
+        scoreNum.innerHTML = scoreNum1;
+
+        //lose reset
+        reset.onclick = function () {
+          results[0].style.visibility = "hidden";
+          pick[0].style.visibility = 'hidden';
+          outer[0].style.visibility = 'visible';
+          outer[2].style.visibility = 'visible';
+          comp[0].style.visibility = "hidden";
+          outer[1].style.left = '18rem';
+          outer[1].style.top = '-11rem';
+          outer[compNum].style.left = '11rem';
+          outer[compNum].style.top = '-5rem';
+
+        }
+      }
+    }
+
+    outer[2].onclick = function () {
+      pick[0].style.visibility = 'visible';
+      outer[2].style.left = '-5rem';
+      outer[2].style.top = '-17rem';
+      outer[0].style.visibility = 'hidden';
+      outer[1].style.visibility = 'hidden';
+      comp[0].style.visibility = 'visible';
+
+      let compNum = Math.floor(Math.random() * 2);
+     
+      console.log(compNum)
+      outer[compNum].style.visibility = 'visible';
+      //lose
+      if (compNum === 0) {
+        outer[compNum].style.left = '27.5rem';
+        outer[compNum].style.top = '2rem';
+        results[0].style.visibility = "visible";
+        results[0].children[0].style.visibility = 'hidden';
+        results[0].children[1].style.top = '-1rem';
+        scoreNum1 -= 1;
+        scoreNum.innerHTML = scoreNum1;
+
+        //lose reset
+        reset.onclick = function () {
+          results[0].style.visibility = "hidden";
+          pick[0].style.visibility = 'hidden';
+          outer[0].style.visibility = 'visible';
+          outer[1].style.visibility = 'visible';
+          comp[0].style.visibility = "hidden";
+          outer[2].style.left = '11rem';
+          outer[2].style.top = '-5rem';
+          outer[compNum].style.left = '2rem';
+          outer[compNum].style.top = '-2rem';
+
+        }
+      }
+
+      //won
+      if (compNum === 1) {
+        outer[compNum].style.left = '27.5rem';
+        outer[compNum].style.top = '-7.5rem';
+        results[0].style.visibility = "visible";
+        results[0].children[0].style.top = '30px';
+        results[0].children[1].style.visibility = 'hidden';
+        scoreNum1 += 1;
+        scoreNum.innerHTML = scoreNum1;
+
+         //win reset
+         reset.onclick = function () {
+          results[0].style.visibility = "hidden";
+          pick[0].style.visibility = 'hidden';
+          outer[0].style.visibility = 'visible';
+          outer[1].style.visibility = 'visible';
+          comp[0].style.visibility = "hidden";
+          outer[2].style.left = '11rem';
+          outer[2].style.top = '-5rem';
+          outer[compNum].style.left = '18rem';
+          outer[compNum].style.top = '-11rem';
+
+        }
+      }
+
+    }
+
+    rules.onclick = function () {
+      rulesBox[0].style.visibility = "visible";
+    }
+
+    close.onclick = function () {
+      rulesBox[0].style.visibility = "hidden";
+    }
+
+
+  </script>
+</body>
+
+</html>
